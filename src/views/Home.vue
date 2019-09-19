@@ -3,13 +3,15 @@
     <div class="product-item" :key="product.id" v-for="product in products">
       <h3>{{ product.name }}</h3>
       <p>{{ product.price | toDollar }}</p>
-      <button>Add to cart</button>
+      <button :disabled="!product.inventory" @click="addProductToCart(product)">
+        Add to cart
+      </button>
     </div>
   </div>
 </template>
 
 <script>
-import {mapState} from 'vuex';
+import {mapActions, mapState} from 'vuex';
 
 export default {
   name: 'home',
@@ -17,7 +19,10 @@ export default {
     ...mapState(['products']),
   },
   mounted() {
-    this.$store.dispatch('getProducts');
+    this.getProducts();
+  },
+  methods: {
+    ...mapActions(['getProducts', 'addProductToCart']),
   },
 };
 </script>
