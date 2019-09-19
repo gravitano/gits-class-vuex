@@ -16,13 +16,14 @@ import {mapActions, mapState} from 'vuex';
 export default {
   name: 'home',
   computed: {
-    ...mapState(['products']),
+    ...mapState('products', ['products']),
   },
   mounted() {
     this.getProducts();
   },
   methods: {
-    ...mapActions(['getProducts', 'addProductToCart']),
+    ...mapActions('products', ['getProducts']),
+    ...mapActions('cart', ['addProductToCart']),
   },
 };
 </script>
