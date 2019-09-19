@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="counter-app">
     <h1>
       Counter
     </h1>
@@ -26,6 +26,9 @@ export default {
 </script>
 
 <style scoped>
+.counter-app {
+  text-align: center;
+}
 .action-buttons {
   display: flex;
   justify-content: space-between;

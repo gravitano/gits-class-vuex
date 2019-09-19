@@ -37,4 +37,8 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.cart-box {
+  margin-top: 3em;
+}
+</style>

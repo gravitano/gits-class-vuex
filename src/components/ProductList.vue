@@ -35,10 +35,13 @@ export default {
 </script>
 
 <style scoped>
+h2 {
+  margin-bottom: 0;
+}
 .product-list {
   display: flex;
 }
 .product-item {
-  flex: 1;
+  flex: 1 33%;
 }
 </style>
