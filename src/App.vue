@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    <h1>Vuex Shopping Cart</h1>
     <!--    <div id="nav">-->
     <!--      <router-link to="/">Home</router-link> |-->
     <!--      <router-link to="/about">About</router-link>-->
