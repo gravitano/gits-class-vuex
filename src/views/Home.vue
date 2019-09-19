@@ -2,7 +2,7 @@
   <div class="product-list">
     <div class="product-item" :key="product.id" v-for="product in products">
       <h3>{{ product.name }}</h3>
-      <p>{{ product.price }}</p>
+      <p>{{ product.price | toDollar }}</p>
       <button>Add to cart</button>
     </div>
   </div>
