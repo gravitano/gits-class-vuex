@@ -2,12 +2,16 @@ import {
   ADD_PRODUCT_TO_CART,
   DECREMENT_PRODUCT_INVENTORY,
   INCREMENT_ITEM_QUANTITY,
+  SET_CART_ITEMS,
+  SET_CHECKOUT_STATUS,
 } from '../mutationTypes';
+import Shop from '../../api/Shop';
 
 export default {
   namespaced: true,
   state: {
     items: [],
+    checkoutStatus: null,
   },
   mutations: {
     [ADD_PRODUCT_TO_CART](state, id) {
@@ -22,6 +26,12 @@ export default {
         cart.quantity++;
       }
     },
+    [SET_CHECKOUT_STATUS](state, status) {
+      state.checkoutStatus = status;
+    },
+    [SET_CART_ITEMS](state, items) {
+      state.items = items;
+    },
   },
   actions: {
     addProductToCart({commit, state}, product) {
@@ -35,6 +45,35 @@ export default {
         }
         commit(`products/${DECREMENT_PRODUCT_INVENTORY}`, id, {root: true});
       }
+    },
+    async checkout({commit}, products) {
+      commit(SET_CHECKOUT_STATUS, null);
+      const success = await Shop.checkout(products);
+      if (success) {
+        commit(SET_CART_ITEMS, []);
+        commit(SET_CHECKOUT_STATUS, 'successful');
+      } else {
+        commit(SET_CHECKOUT_STATUS, 'failed');
+      }
+    },
+  },
+  getters: {
+    cartProducts: (state, getters, rootState) => {
+      return state.items.map(({id, quantity}) => {
+        const product = rootState.products.products.find(
+          product => product.id === id,
+        );
+        return {
+          name: product.name,
+          price: product.price,
+          quantity,
+        };
+      });
+    },
+    cartTotalPrice: (state, getters) => {
+      return getters.cartProducts.reduce((total, product) => {
+        return total + product.price * product.quantity;
+      }, 0);
     },
   },
 };
