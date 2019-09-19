@@ -1,18 +1,29 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+  <div class="product-list">
+    <div class="product-item" :key="product.id" v-for="product in products">
+      <h3>{{ product.name }}</h3>
+      <p>{{ product.price }}</p>
+      <button>Add to cart</button>
+    </div>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
+import {mapState} from 'vuex';
 
 export default {
-  name: "home",
-  components: {
-    HelloWorld
-  }
+  name: 'home',
+  computed: {
+    ...mapState(['products']),
+  },
 };
 </script>
+
+<style scoped>
+.product-list {
+  display: flex;
+}
+.product-item {
+  flex: 1;
+}
+</style>
