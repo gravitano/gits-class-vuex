@@ -16,6 +16,9 @@ export default {
   computed: {
     ...mapState(['products']),
   },
+  mounted() {
+    this.$store.dispatch('getProducts');
+  },
 };
 </script>
 
