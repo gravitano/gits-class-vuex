@@ -10,8 +10,31 @@ export default new Vuex.Store({
     products,
     cart,
   },
-  state: {},
-  mutations: {},
-  actions: {},
-  getters: {},
+  state: {
+    count: 0,
+  },
+  mutations: {
+    increment(state) {
+      state.count++;
+    },
+    decrement(state) {
+      state.count--;
+    },
+  },
+  actions: {
+    increment({commit}) {
+      commit('increment');
+    },
+    decrement({commit}) {
+      commit('decrement');
+    },
+    incrementAsync({commit}) {
+      setTimeout(() => {
+        commit('increment');
+      }, 1000);
+    },
+  },
+  getters: {
+    count: state => state.count,
+  },
 });
