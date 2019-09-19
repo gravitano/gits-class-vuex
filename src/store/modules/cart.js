@@ -7,17 +7,17 @@ import {
 export default {
   namespaced: true,
   state: {
-    cartItems: [],
+    items: [],
   },
   mutations: {
     [ADD_PRODUCT_TO_CART](state, id) {
-      state.cartItems.push({
+      state.items.push({
         id,
         quantity: 1,
       });
     },
     [INCREMENT_ITEM_QUANTITY](state, id) {
-      const cart = state.cartItems.find(item => item.id === id);
+      const cart = state.items.find(item => item.id === id);
       if (cart) {
         cart.quantity++;
       }
@@ -27,7 +27,7 @@ export default {
     addProductToCart({commit, state}, product) {
       const {id} = product;
       if (product.inventory > 0) {
-        const cartItem = state.cartItems.find(item => item.id === id);
+        const cartItem = state.items.find(item => item.id === id);
         if (!cartItem) {
           commit(ADD_PRODUCT_TO_CART, id);
         } else {
